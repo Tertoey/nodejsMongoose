@@ -1,0 +1,7 @@
+init // create package.json
+nodemon //restart server
+morgan // chk lock http
+express // webapp node js
+mongoose // mongoDB
+body-parser // get input from html
+multer // upload file from web html
