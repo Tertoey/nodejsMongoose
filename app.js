@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const multer = require('multer') // module upload
 const productRoute = require('./api/route/product');
 const orderRoute = require('./api/route/orders');
 const userRoute = require('./api/route/user')
@@ -28,17 +29,17 @@ app.use('/product', productRoute) // ต่อท้าย 127.0.0.1
 app.use('/orders', orderRoute)
 app.use('/user',userRoute)
 
-// app.use((req,res,next)=>{
-//     const error = new error('Not found')
-//     error.status= 404
-//     next(error);
-// })
+app.use((req,res,next)=>{
+    const error = new Error('Not found')
+    error.status= 404
+    next(error);
+})
 
-// app.use((error,req,res,next)=>{
-//     res.status(error.status || 500)
-//     res.json({
-//         message : error.message
-//     })
-// })
+app.use((error,req,res,next)=>{
+    res.status(error.status || 500)
+    res.json({
+        message : error.message
+    })
+})
  
 module.exports = app

@@ -22,7 +22,7 @@ const fileFilter = (req,file,cb)=>{
         cb(null, true)
     }else{
         console.log('file type not correct')
-        cb(null, false)
+        cb(new Error("file type not correct"), false);
     }
     }
 const upload = multer({
@@ -34,7 +34,7 @@ const upload = multer({
 router.get('/', (req,res,next)=>{
     Product.find()
     // or .select('_id name price')
-    .select('-__v -_id')
+    .select('-__v ')
     .sort({price:-1})
     .exec()
     .then(docs =>{
